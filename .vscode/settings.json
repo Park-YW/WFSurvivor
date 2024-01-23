@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "WhiteFang.sln"
+    "dotnet.defaultSolution": "WFSurvivor.sln"
 }
