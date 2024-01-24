@@ -16,7 +16,13 @@ public class player : MonoBehaviour
     {
         var _horizontal = Input.GetAxis("Horizontal");
         var _vertical = Input.GetAxis("Vertical");
-        var moveInput = new Vector3(_horizontal, 0, _vertical);
-        transform.position += moveInput*Time.deltaTime;
+        var _velocity = new Vector3(_horizontal, 0, _vertical);
+        transform.position += _velocity*Time.deltaTime;
+        if (_velocity.magnitude > 0.1f)
+        {
+            // lerp to velocity
+            var targetRotation = Quaternion.LookRotation(_velocity);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
     }
 }
