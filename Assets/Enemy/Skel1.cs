@@ -14,9 +14,11 @@ public class Skel1 : MonoBehaviour
 
     void Awake()
     {
+        gameObject.SetActive(true);
         _rigidbody = GetComponent<Rigidbody>();
         _nav = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        target = FindFirstObjectByType<player>().gameObject;
     }
 
     void Update()
@@ -33,10 +35,10 @@ public class Skel1 : MonoBehaviour
         
         
     }
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider col)
     {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.tag == "Bullet")
+        Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Bullet")
         {
             Debug.Log("f");
             gameObject.SetActive(false);

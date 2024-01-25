@@ -5,6 +5,8 @@ using UnityEngine;
 public class player : MonoBehaviour
 {
     public Transform _transform;
+    public GameObject _startPoint;
+    public Minigun minigun;
     public float moveSpeed = 2f;
 
     public Dictionary<string, int> status = new Dictionary<string, int>()
@@ -16,6 +18,16 @@ public class player : MonoBehaviour
     void Awake()
     {
         _transform = GetComponent<Transform>();
+    }
+
+    void OnEnable()
+    {
+        //EventManager.Instance.SubscribeEvent("gameStart", OnGameStart);
+        //EventManager.Instance.SubscribeEvent("gameOver", OnGameOver);
+    }
+    void OnGameStart()
+    {
+        transform.position = _startPoint.transform.position;
     }
 
     // Update is called once per frame
