@@ -7,12 +7,12 @@ public class StartButton : MonoBehaviour
 {
     public void OnClick()
     {   
-        Debug.Log("ff");
         EventManager.Instance.EmitEvent("gameStart", null);
+        gameObject.SetActive(false);
     }
     public void GameStart()
     {
-        
+
     }
 
 }

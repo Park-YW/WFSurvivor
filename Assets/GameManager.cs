@@ -18,10 +18,10 @@ public class GameManager : MonoBehaviour
     }
     void OnEnable()
     {
-        EventManager.Instance.SubscribeEvent("gameStart", OnGameOver);
+        EventManager.Instance.SubscribeEvent("gameStart", OnGameStart);
         //EventManager.Instance.SubscribeEvent("gameOver", OnGameOver);
     }
-    void OnGameOver(object param)
+    void OnGameStart(object param)
     {
         state = GameState.Play;
     }
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         if (state != GameState.Play)
         {
-            Time.timeScale = 1;
+            Time.timeScale = 0;
         }
         else
         {
