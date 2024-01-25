@@ -370,10 +370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b394b2935004014ba755c9dd56d6427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  _rigidbody: {fileID: 0}
-  _nav: {fileID: 0}
-  _animator: {fileID: 0}
+  coin: {fileID: 7968246617731259718, guid: 60bff0ea5991ba94aa2bf11d50a7111c, type: 3}
+  HP: 2
+  isAttack: 0
 --- !u!195 &266199888968841252
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class MinigunBullet : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
+
     void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        //_rigidbody.AddForce(transform.forward * 100, ForceMode.Impulse);
+        StartCoroutine("Die");
+    }
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

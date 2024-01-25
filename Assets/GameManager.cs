@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
     {
         Loby,
         Play,
+        LevelUp,
         GameOver
     }
     public GameState state = GameState.Loby;
+    public GameObject restartButton;
     void Start()
     {
         
@@ -19,11 +21,16 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.Instance.SubscribeEvent("gameStart", OnGameStart);
-        //EventManager.Instance.SubscribeEvent("gameOver", OnGameOver);
+        EventManager.Instance.SubscribeEvent("gameOver", OnGameOver);
     }
     void OnGameStart(object param)
     {
         state = GameState.Play;
+    }
+    void OnGameOver(object param)
+    {
+        state = GameState.GameOver;
+        restartButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

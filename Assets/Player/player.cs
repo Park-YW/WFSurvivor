@@ -1,34 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
+using Npc_State;
+using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    public Transform _transform;
     public GameObject _startPoint;
     public Minigun minigun;
     public float moveSpeed = 2f;
 
-    public Dictionary<string, int> status = new Dictionary<string, int>()
-    {
-        {"HP", 10},
-        {"Level", 1}
-
-    };
+    public int 
+    _HP = 20,
+    _Level = 1,
+    _Exp = 0; 
+    public float delayTimer = 0;
     void Awake()
     {
-        _transform = GetComponent<Transform>();
     }
 
     void OnEnable()
     {
-        //EventManager.Instance.SubscribeEvent("gameStart", OnGameStart);
-        //EventManager.Instance.SubscribeEvent("gameOver", OnGameOver);
+        EventManager.Instance.SubscribeEvent("gameStart", OnGameStart);
+        EventManager.Instance.SubscribeEvent("attack", OnAttack);
+        EventManager.Instance.SubscribeEvent("GetExp", GetExp);
+        
     }
-    void OnGameStart()
+    void OnGameStart(object param)
     {
-        transform.position = _startPoint.transform.position;
+        transform.position = new Vector3(0,0,0);
+        _HP = 20;
     }
+    void OnAttack(object param)
+    {
+
+        _HP -= 1;
+    }
+    IEnumerator Timer()
+    {
+        yield return null;
+    }
+    
+    void GetExp(object param)
+    {
+        _Exp+=1;
+        if (_Exp >= _Level*3)
+        {
+
+        }
+    }
+    
 
     // Update is called once per frame
     void Update()
@@ -41,6 +63,10 @@ public class player : MonoBehaviour
         {
             // lerp to velocity
             transform.rotation = Quaternion.LookRotation(_velocity);
+        }
+        if (_HP <= 0)
+        {
+            EventManager.Instance.EmitEvent("gameOver", null);
         }
     }
 }

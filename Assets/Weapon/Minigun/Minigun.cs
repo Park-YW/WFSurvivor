@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Minigun : Follower
+public class Minigun : MonoBehaviour
 
 {
 
@@ -18,12 +18,9 @@ public class Minigun : Follower
         StartCoroutine("FireRate");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //var bulletGameObject = PoolingManager.Instance.Get("bullet");
-        
-        //Invoke("Fire",1f);
+
         
     }
     void Fire()
