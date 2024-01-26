@@ -4,6 +4,7 @@ using Npc_State;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
@@ -15,9 +16,14 @@ public class player : MonoBehaviour
     _HP = 20,
     _Level = 1,
     _Exp = 0; 
-    public float delayTimer = 0;
+    public bool _takingDamage = false;
+    public GameObject HP_Bar, ScorePanel;
+    private Slider HP_Slider;
     void Awake()
     {
+        
+        HP_Slider = HP_Bar.GetComponent<Slider>();
+        
     }
 
     void OnEnable()
@@ -25,29 +31,47 @@ public class player : MonoBehaviour
         EventManager.Instance.SubscribeEvent("gameStart", OnGameStart);
         EventManager.Instance.SubscribeEvent("attack", OnAttack);
         EventManager.Instance.SubscribeEvent("GetExp", GetExp);
-        
+        EventManager.Instance.SubscribeEvent("gameOver", Dead);
+    }
+    void Dead(object param)
+    {
+        HP_Slider.value = 1;
+        HP_Bar.SetActive(false);
+        ScorePanel.SetActive(false);
     }
     void OnGameStart(object param)
     {
+        HP_Slider.value = _HP/20f;
+        HP_Bar.SetActive(true);
+        ScorePanel.SetActive(true);
         transform.position = new Vector3(0,0,0);
         _HP = 20;
     }
     void OnAttack(object param)
     {
+        if(_takingDamage == false)
+        {
+            HP_Slider.value = _HP/20f;
+            _HP -= 1;
+            StartCoroutine("Timer");
+        }
+        
 
-        _HP -= 1;
     }
     IEnumerator Timer()
     {
-        yield return null;
+        _takingDamage = true;
+        yield return new WaitForSeconds(0.4f);
+        _takingDamage =false;
     }
     
     void GetExp(object param)
     {
         _Exp+=1;
-        if (_Exp >= _Level*3)
+        if (_Exp >= _Level*2)
         {
-
+            _Level+=1;
+            _Exp = 0;
         }
     }
     

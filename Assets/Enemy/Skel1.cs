@@ -43,14 +43,18 @@ public class Skel1 : MonoBehaviour
             var tossedcoin = Instantiate(coin, null, transform);
             tossedcoin.transform.position = transform.position;
         }
+        if(Vector3.Distance(target.transform.position, transform.position)>20)
+        {
+            Destroy(gameObject);
+        }
         
         
     }
     void OnEnable()
     {
-        EventManager.Instance.SubscribeEvent("gameStart", OnGameStart);
+        EventManager.Instance.SubscribeEvent("gameOver", ClearSkel);
     }
-    void OnGameStart(object param)
+    void ClearSkel(object param)
     {
         Destroy(gameObject);
     }

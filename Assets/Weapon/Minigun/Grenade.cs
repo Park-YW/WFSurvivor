@@ -1,21 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class Minigun : MonoBehaviour
-
+public class Grenade : MonoBehaviour
 {
-
-    public GameObject bullet;
+    public GameObject grenade;
     public int level=1;
     private float FireAngle = 0;
 
-
-    // Start is called before the first frame update
     void Awake()
     {
-        StartCoroutine("FireRate");
+        StartCoroutine("GrenadeRate");
     }
 
     void Update()
@@ -25,7 +20,7 @@ public class Minigun : MonoBehaviour
     }
     void Fire()
     {
-        var firedBullet = Instantiate(bullet, null, true);
+        var firedBullet = Instantiate(grenade, null, true);
         firedBullet.SetActive(true);
         firedBullet.transform.forward = transform.forward;
         firedBullet.transform.position = transform.position;
@@ -36,10 +31,10 @@ public class Minigun : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, FireAngle, 0);
     }
 
-    IEnumerator FireRate()
+    IEnumerator GrenadeRate()
     {
         Fire();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
         StartCoroutine("FireRate");
     }
 }

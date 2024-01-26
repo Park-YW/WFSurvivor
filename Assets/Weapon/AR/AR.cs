@@ -6,6 +6,7 @@ public class AR : MonoBehaviour
 {
     public GameObject bullet;
     public int level=1;
+    public int firespeed;
 
 
     // Start is called before the first frame update
@@ -22,6 +23,14 @@ public class AR : MonoBehaviour
         //Invoke("Fire",1f);
         
     }
+    void Enable()
+    {
+        EventManager.Instance.SubscribeEvent("levelUp", levelUpAR);
+    }
+    void levelUpAR(object param)
+    {
+        level +=1;
+    }
     void Fire()
     {
         var firedBullet = Instantiate(bullet, null, true);
@@ -36,7 +45,7 @@ public class AR : MonoBehaviour
     IEnumerator FireRate()
     {
         Fire();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1/(level/3+1));
         StartCoroutine("FireRate");
     }
 }

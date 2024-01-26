@@ -8,7 +8,6 @@ public class StartButton : MonoBehaviour
     public void OnClick()
     {   
         EventManager.Instance.EmitEvent("gameStart", null);
-        Debug.Log("ffff");
         gameObject.SetActive(false);
     }
     public void GameStart()

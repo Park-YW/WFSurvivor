@@ -31,7 +31,7 @@ public class EnmySpawner : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, i, 0);
             var spawnedskul = Instantiate(spawnPrefab, null, true);
             spawnedskul.transform.position = transform.position;
-            spawnedskul.transform.position += transform.forward*15;
+            spawnedskul.transform.position += transform.forward*10;
         }
         
         

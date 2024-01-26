@@ -3,18 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Npc_State
-{
     public class EventManager : MonoBehaviour
     {
     
-        public static EventManager Instance;
+        private static EventManager _instance;
+        public static EventManager Instance{
+            get{
+
+                if(_instance == null) _instance = FindFirstObjectByType<EventManager>();
+                if(_instance == null) {
+                    var go = new GameObject(nameof(EventManager));
+                    _instance = go.AddComponent<EventManager>();
+                }
+
+                return _instance;
+            }
+        }
         private Dictionary<string, Action<object>> _eventDatabase;
 
         void Awake()
         {
-            Instance = this;
             _eventDatabase = new Dictionary<string, Action<object>>();
+            
         }
 
         public void SubscribeEvent(string eventName, Action<object> eventAction)
@@ -33,5 +43,5 @@ namespace Npc_State
             _eventDatabase[eventName].Invoke(param);
         }
     }
-}
+
 
