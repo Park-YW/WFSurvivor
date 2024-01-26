@@ -748,9 +748,11 @@ MonoBehaviour:
   _HP: 20
   _Level: 1
   _Exp: 0
+  _score: 0
   _takingDamage: 0
   HP_Bar: {fileID: 1453203550}
   ScorePanel: {fileID: 2145907281}
+  Score2: {fileID: 2145907283}
 --- !u!4 &608524761 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5862077421946812769, guid: d5b4b9e82e6e45e4283c6435e743b647, type: 3}

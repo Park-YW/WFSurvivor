@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Npc_State;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
@@ -15,10 +16,13 @@ public class player : MonoBehaviour
     public int 
     _HP = 20,
     _Level = 1,
-    _Exp = 0; 
+    _Exp = 0,
+    _score = 0; 
     public bool _takingDamage = false;
     public GameObject HP_Bar, ScorePanel;
+    public TextMeshProUGUI Score2;
     private Slider HP_Slider;
+
     void Awake()
     {
         
@@ -46,6 +50,8 @@ public class player : MonoBehaviour
         ScorePanel.SetActive(true);
         transform.position = new Vector3(0,0,0);
         _HP = 20;
+        _Exp = 0;
+        _score = 0;
     }
     void OnAttack(object param)
     {
@@ -67,9 +73,13 @@ public class player : MonoBehaviour
     
     void GetExp(object param)
     {
+        _score+=1;
         _Exp+=1;
+        Score2.text = "Score : " + _score.ToString();
         if (_Exp >= _Level*2)
         {
+            
+            FindFirstObjectByType<AR>().levelUpAR(null);
             _Level+=1;
             _Exp = 0;
         }

@@ -27,7 +27,7 @@ public class AR : MonoBehaviour
     {
         EventManager.Instance.SubscribeEvent("levelUp", levelUpAR);
     }
-    void levelUpAR(object param)
+    public void levelUpAR(object param)
     {
         level +=1;
     }

@@ -18,10 +18,13 @@ public class Minigun : MonoBehaviour
         StartCoroutine("FireRate");
     }
 
-    void Update()
+    void Enable()
     {
-
-        
+        //EventManager.Instance.SubscribeEvent("levelUp", levelUpMG);
+    }
+    void levelUpMG(object param)
+    {
+        level +=1;
     }
     void Fire()
     {
